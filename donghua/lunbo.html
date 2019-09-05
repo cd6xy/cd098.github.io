@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin:0;
+		}
+		.lee1-enter{
+			/*优先级*/
+			left: -600px !important;
+			opacity: 0;
+		}
+		.lee1-enter-active{
+			transition: all 1s;
+		}
+		.lee1-enter-to{
+			background: red;
+		}
+		.lee1-leave{
+			/*background: green;*/
+		}
+		.lee1-leave-active{
+			transition: all 1s;
+		}
+		.lee-leave-to{
+			opacity: 0;
+			left: 600px !important;
+			/*background: red;*/
+		}
+		.lee2-enter{
+			/*background: red !important;*/
+			left: 800px !important;
+			opacity: 0;
+		}
+		.lee2-enter-active{
+			transition: all 1s;
+		}
+		.lee2-enter-to{
+			/*background: green;*/
+		}
+		.lee2-leave{
+			/*background: green;*/
+		}
+		.lee2-leave-active{
+			transition: all 1s;
+		}
+		.lee2-leave-to{
+			/*background: red;*/
+			opacity: 0;
+			left: -600px !important;
+			
+		}
+	</style>
+<body>
+	<div id="box">
+		<lee1 style="text-align:center;"></lee1>
+
+	</div>
+	<template id="lee1">
+		<div>
+			<button @click="no1">下一个</button>
+			<button @click="no2">上一个</button>
+			<div style="width:600px;margin:0 auto;position:relative">
+				<transition :name="t_type" v-for="(i,$index) in arr">
+					 <div style="width:600px;position:absolute;top:0;left:0;" v-show="type==$index">
+					 	<img :src="i" alt="" width="600px">
+					 </div>
+				</transition>
+			</div>
+		</div>
+	</template>
+</body>
+<script src="vue.js"></script>
+<script>
+	Vue.component("lee1",{
+		template:"#lee1",
+		methods:{
+			no1(){
+				this.t_type="lee1"
+				this.type++
+				if(this.type>=3){
+					this.type=0
+				}
+			},
+			no2(){
+				this.t_type="lee2"
+				this.type--
+				if(this.type<=-1){
+					this.type=2
+				}
+			}
+		},
+		data(){
+			return{
+				type:0,
+				t_type:"lee1",
+				arr:[
+				"http://img3.imgtn.bdimg.com/it/u=1316361135,2309731824&fm=26&gp=0.jpg",
+				"http://pic18.nipic.com/20111226/9111176_230101165120_2.jpg",
+				"http://img4.imgtn.bdimg.com/it/u=270983881,3593042199&fm=26&gp=0.jpg"
+				]
+			}
+		}
+	})
+	new Vue({
+		el:"#box"
+	})
+</script>
+</html>

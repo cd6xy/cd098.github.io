@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			padding: 0;
+			margin:0;
+		}
+		.lee-enter{
+			/*优先级*/
+			background:red !important;
+		}
+		.lee-enter-active{
+			transition:all 1s;
+
+		}
+		.lee-enter-to{
+			margin-left: 30px;
+			background:blue;
+		}
+		.lee-leave{
+			background:blue;
+		}
+		.lee-leave-active{
+			transition:all 1s;
+		}
+		.lee-leave-to{
+			margin-left: 30px;
+			background:red;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<!-- <div class="head" style="width:600px;height:40px;background-color: #CCC;text-align: center;padding-top: 30px;">
+			首页
+		</div> -->
+
+		<lee></lee>
+	</div>
+	<!-- <template id="shouye">
+		<div>
+			首页
+		</div>
+	</template> -->
+	<template id="lee">
+		<div style="text-align:center;">
+			<button @click="type=!type">切换</button>
+			<transition name="lee">
+				<div v-show="type">hellow vue!</div>
+			</transition>
+			
+		</div>
+	</template>
+</body>
+<script src="vue.js"></script>
+<!-- <script src="vue-router.js"></script> -->
+<!-- <script src="jquery.js"></script> -->
+<script>
+	Vue.component("lee",{
+		template:"#lee",
+		data(){
+			return{
+				type:true
+			}
+		}
+	})
+	new Vue({
+		el:"#box"
+	})
+	// var index={
+	// 	template:"#index"
+	// }
+</script>
+</html>
